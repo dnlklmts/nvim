@@ -47,6 +47,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "navarasu/onedark.nvim"           -- Atom's One Dark and Light theme
+  use "nvim-lualine/lualine.nvim"       -- Fast and easy to configure neovim statusline
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
