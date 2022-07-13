@@ -36,7 +36,10 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
-
+  langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz",
+  -- guicursor = "i:block"                 -- change cursor shape for insert mode
+  spell = true,                            -- enable spellchecker
+  spelllang = "en,ru",                     -- specify languages for spellchecking 
 }
 
 for k, v in pairs(options) do
