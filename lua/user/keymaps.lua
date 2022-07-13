@@ -22,6 +22,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Open file explorer
 keymap("n", "<Leader>e", ":Lex 30<CR>", opts)
+keymap("n", "<Leader>l", ":nohl<CR>", opts)
 
 -- Open terminal in split window
 keymap("n", "<Leader>vst", ":vsplit term://zsh<CR>", opts)
