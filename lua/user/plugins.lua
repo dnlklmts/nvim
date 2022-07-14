@@ -41,25 +41,44 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
   -- My plugins here
-  use "wbthomason/packer.nvim"          -- Have packer manage itself
-  use "nvim-lua/popup.nvim"             -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim"           -- Useful lua functions used by lots of plugins
+  use "wbthomason/packer.nvim"                -- Have packer manage itself
+  use "nvim-lua/popup.nvim"                   -- An implementation of the Popup API from vim in Neovim
+  use "nvim-lua/plenary.nvim"                 -- Useful lua functions used by lots of plugins
 
   -- Colorschemes
-  use "navarasu/onedark.nvim"           -- Atom's One Dark and Light theme
-  use "nvim-lualine/lualine.nvim"       -- Fast and easy to configure neovim statusline
+  use "navarasu/onedark.nvim"                 -- Atom's One Dark and Light theme
+  use "nvim-lualine/lualine.nvim"             -- Fast and easy to configure neovim statusline
+
+  -- UI
+  use {
+    "SmiteshP/nvim-navic",                    -- Simple winbar/statusline plugin that shows your current code context
+    disable = true,
+    requires = "neovim/nvim-lspconfig",
+  }
+  use {
+    "kyazdani42/nvim-web-devicons",          -- Adds file type icons
+    disable = true,
+  }
 
   -- cmp plugins
-  use "hrsh7th/nvim-cmp"                -- The completion plugin
-  use "hrsh7th/cmp-buffer"              -- buffer completions
-  use "hrsh7th/cmp-path"                -- path completions
-  use "hrsh7th/cmp-cmdline"             -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip"        -- snippet completions
+  use "hrsh7th/nvim-cmp"                      -- The completion plugin
+  use "hrsh7th/cmp-buffer"                    -- buffer completions
+  use "hrsh7th/cmp-path"                      -- path completions
+  use "hrsh7th/cmp-cmdline"                   -- cmdline completions
+  use "saadparwaiz1/cmp_luasnip"              -- snippet completions
+  use "hrsh7th/cmp-nvim-lsp"                  -- LSP completions
+  use "hrsh7th/cmp-nvim-lua"                  -- Lua completion
 
   -- snippets
-  use "L3MON4D3/LuaSnip"                --snippet engine
-  use "rafamadriz/friendly-snippets"    -- a bunch of snippets to use  -- Automatically set up your configuration after cloning packer.nvim
-  --
+  use "L3MON4D3/LuaSnip"                      -- snippet engine
+  use "rafamadriz/friendly-snippets"          -- a bunch of snippets to use  -- Automatically set up your configuration after cloning packer.nvim
+
+  -- LSP support
+  use "neovim/nvim-lspconfig"                 -- enable LSP
+  use "williamboman/nvim-lsp-installer"       -- simple to use language server installer
+  use "RRethy/vim-illuminate"                 -- automatically highlighting other uses of the word under the cursor
+  use "b0o/SchemaStore.nvim"                  -- JSON schemas for Neovim 
+
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
     require("packer").sync()
