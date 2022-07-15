@@ -68,3 +68,6 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Remap exiting terminal mode
 keymap("t", "C-[", "<C-\\><C-N>", term_opts)
+
+-- Telescope shortcuts
+keymap("n", "<Leader>t", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false, winblend = 10 }))<cr>", opts)

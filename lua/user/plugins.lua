@@ -79,6 +79,11 @@ return packer.startup(function(use)
   use "RRethy/vim-illuminate"                 -- automatically highlighting other uses of the word under the cursor
   use "b0o/SchemaStore.nvim"                  -- JSON schemas for Neovim 
 
+  -- Telescope
+  use {
+    "nvim-telescope/telescope.nvim", tag = "0.1.0",
+    requires = "nvim-lua/plenary.nvim",
+  }
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
     require("packer").sync()
