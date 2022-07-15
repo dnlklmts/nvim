@@ -73,4 +73,15 @@ keymap("t", "C-[", "<C-\\><C-N>", term_opts)
 keymap("n", "<Leader>t", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false, winblend = 10 }))<cr>", opts)
 
 -- Nvim Tree
- keymap("n", "<Leader>e", ":NvimTreeToggle<cr>", opts)
+keymap("n", "<Leader>e", ":NvimTreeToggle<cr>", opts)
+
+-- Ultra folding
+keymap('n', 'zR', require('ufo').openAllFolds)
+keymap('n', 'zM', require('ufo').closeAllFolds)
+keymap('n', 'K', function()
+  local winid = require('ufo').peekFoldedLinesUnderCursor()
+  if not winid then
+    -- nvimlsp
+    vim.lsp.buf.hover()
+  end
+end)

@@ -66,6 +66,10 @@ return packer.startup(function(use)
   }
   use "akinsho/bufferline.nvim"                -- shows open buffers
   use "moll/vim-bbye"                          -- Delete buffers and close files in Vim without closing your windows 
+  use {
+    "kevinhwang91/nvim-ufo",                   -- Adding folds high accuracy with Folding Range in LSP
+    requires = "kevinhwang91/promise-async"
+  }
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp"                      -- The completion plugin

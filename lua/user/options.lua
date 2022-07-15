@@ -37,8 +37,12 @@ local options = {
   langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz",
   spell = true,                            -- enable spellchecker
   spelllang = "en,ru",                     -- specify languages for spellchecking 
-  foldmethod = "expr",
-  foldexpr = "nvim_treesitter#foldexpr()"
+  -- foldmethod = "expr",
+  -- foldexpr = "nvim_treesitter#foldexpr()"
+  foldcolumn = '1',
+  foldlevel = 99,                          -- Using ufo provider need a large value, feel free to decrease the value
+  foldlevelstart = -1,
+  foldenable = true,
 }
 
 for k, v in pairs(options) do
