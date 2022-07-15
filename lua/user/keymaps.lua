@@ -70,11 +70,13 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("t", "C-[", "<C-\\><C-N>", term_opts)
 
 -- Telescope shortcuts
-keymap("n", "<Leader>t", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false, winblend = 10 }))<cr>", opts)
+keymap("n", "<Leader>t",
+  ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false, winblend = 10 }))<CR>",
+  opts)
 
 -- Nvim Tree
-keymap("n", "<Leader>e", ":NvimTreeToggle<cr>", opts)
-
+keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<Leader>q", ":Bdelete %<CR>", opts)
 -- Ultra folding
 keymap('n', 'zR', require('ufo').openAllFolds)
 keymap('n', 'zM', require('ufo').closeAllFolds)

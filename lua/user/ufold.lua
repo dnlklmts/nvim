@@ -31,6 +31,12 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     return newVirtText
 end
 
+local ftMap = {
+    vim = 'indent',
+    python = {'indent'},
+    git = ''
+}
+
 ufo.setup({
   open_fold_hl_timeout = 150,
   preview = {
@@ -45,7 +51,7 @@ ufo.setup({
     }
   },
   provider_selector = function(bufnr, filetype)
-        return {'treesitter', 'indent'}
+    return ftMap[filetype] or {'treesitter', 'indent'}
   end,
   fold_virt_text_handler = handler,
 })
@@ -53,4 +59,4 @@ ufo.setup({
 -- buffer scope handler
 -- will override global handler if it is existed
 local bufnr = vim.api.nvim_get_current_buf()
-require('ufo').setFoldVirtTextHandler(bufnr, handler)
+ufo.setFoldVirtTextHandler(bufnr, handler)

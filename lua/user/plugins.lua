@@ -23,6 +23,17 @@ vim.cmd [[
   augroup end
 ]]
 
+-- Since NVIM v0.4.0-464-g5eaa45547, commit 5eaa45547975c652e594d0d6dbe34c1316873dc7
+-- 'secure' is set when 'modeline' is set, which will cause a lot of commands
+-- cannot run in autocmd when opening help page.
+-- https://github.com/neoclide/coc.nvim/issues/668#issuecomment-481975596
+vim.cmd [[
+  augroup secure_modeline_conflict_workaround
+    autocmd!
+    autocmd FileType help setlocal nomodeline
+  augroup END
+]]
+
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
