@@ -58,8 +58,11 @@ return packer.startup(function(use)
     requires = "neovim/nvim-lspconfig",
   }
   use {
-    "kyazdani42/nvim-web-devicons",          -- Adds file type icons
-    disable = true,
+    "kyazdani42/nvim-tree.lua",
+    requires = {
+      "kyazdani42/nvim-web-devicons",          -- Adds file type icons
+      disable = false,
+    },
   }
 
   -- cmp plugins

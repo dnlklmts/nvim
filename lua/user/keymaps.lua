@@ -21,7 +21,7 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Open file explorer
-keymap("n", "<Leader>e", ":Lex 30<CR>", opts)
+-- keymap("n", "<Leader>e", ":Lex 30<CR>", opts)
 keymap("n", "<Leader>l", ":nohl<CR>", opts)
 
 -- Open terminal in split window
@@ -71,3 +71,6 @@ keymap("t", "C-[", "<C-\\><C-N>", term_opts)
 
 -- Telescope shortcuts
 keymap("n", "<Leader>t", ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false, winblend = 10 }))<cr>", opts)
+
+-- Nvim Tree
+ keymap("n", "<Leader>e", ":NvimTreeToggle<cr>", opts)
