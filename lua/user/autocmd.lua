@@ -1,12 +1,14 @@
 -- Unfold code blocks after a buffer is displayed in a window
 vim.api.nvim_create_autocmd(
   {
-    "BufWinEnter",
-    "BufFilePost",
+    -- "BufWinEnter",
+    -- "BufFilePost",
+    "BufReadPre",
     "BufReadPost",
+    "FileReadPre",
     "FileReadPost",
-    "BufWritePost",
-    "InsertLeave",
+    -- "BufWritePost",
+    -- "InsertLeave",
   },
   {
     pattern = { "*" },

@@ -64,6 +64,8 @@ return packer.startup(function(use)
       disable = false,
     },
   }
+  use "akinsho/bufferline.nvim"                -- shows open buffers
+  use "moll/vim-bbye"                          -- Delete buffers and close files in Vim without closing your windows 
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp"                      -- The completion plugin
