@@ -37,6 +37,8 @@ local options = {
   langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz",
   spell = true,                            -- enable spellchecker
   spelllang = "en,ru",                     -- specify languages for spellchecking 
+  foldmethod = "expr",
+  foldexpr = "nvim_treesitter#foldexpr()"
 }
 
 for k, v in pairs(options) do

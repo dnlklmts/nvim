@@ -97,7 +97,7 @@ function M.goimports(wait_ms)
   end
 end
 
-vim.cmd [[ autocmd BufWritePre *.go lua require("user.lsp.handlers").goimports(1000) ]]
+-- vim.cmd [[ autocmd BufWritePre *.go lua require("user.lsp.handlers").goimports(1000) ]]
 
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
