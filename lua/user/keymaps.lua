@@ -29,10 +29,10 @@ keymap("n", "<Leader>vst", ":vsplit term://zsh<CR>", opts)
 keymap("n", "<Leader>hst", ":split term://zsh<CR>", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize +2<CR>", opts)
-keymap("n", "<C-Down>", ":resize -2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-K>", ":resize +2<CR>", opts)
+keymap("n", "<C-J>", ":resize -2<CR>", opts)
+keymap("n", "<C-H>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-L>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -54,8 +54,8 @@ keymap("v", "p", '"_dP', opts) -- change default yank/paste behavior
 
 -- Visual Block --
 -- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<S-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<S-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
@@ -70,13 +70,17 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("t", "C-[", "<C-\\><C-N>", term_opts)
 
 -- Telescope shortcuts
-keymap("n", "<Leader>t",
-  ":lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false, winblend = 10 }))<CR>",
-  opts)
+keymap("n", "<Leader>p", function()
+  return require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
+    previewer = false,
+    winblend = 10,
+  })) end)
+keymap("n", "<Leader>f", require("telescope.builtin").live_grep)
 
 -- Nvim Tree
 keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<Leader>q", ":Bdelete %<CR>", opts)
+
 -- Ultra folding
 keymap('n', 'zR', require('ufo').openAllFolds)
 keymap('n', 'zM', require('ufo').closeAllFolds)
