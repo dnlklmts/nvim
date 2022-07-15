@@ -1,5 +1,5 @@
 -- Unfold code blocks after a buffer is displayed in a window
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+vim.api.nvim_create_autocmd({ "BufWinEnter", "BufReadPost", "FileReadPost" }, {
   pattern = { "*" },
   callback = function()
     vim.cmd "normal zR"
