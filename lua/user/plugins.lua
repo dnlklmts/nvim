@@ -84,12 +84,15 @@ return packer.startup(function(use)
     "nvim-telescope/telescope.nvim", tag = "0.1.0",
     requires = "nvim-lua/plenary.nvim",
   }
-  --
+
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+
+  -- Autopairs
+  use "windwp/nvim-autopairs"
 
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
