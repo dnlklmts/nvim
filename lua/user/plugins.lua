@@ -95,6 +95,9 @@ return packer.startup(function(use)
   -- Context aware commenting using tree-sitter
   use "JoosepAlviste/nvim-ts-context-commentstring"
 
+  -- Git
+  use "lewis6991/gitsigns.nvim"
+
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
     require("packer").sync()
