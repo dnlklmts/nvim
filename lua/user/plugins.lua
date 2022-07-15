@@ -44,6 +44,8 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim"                -- Have packer manage itself
   use "nvim-lua/popup.nvim"                   -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim"                 -- Useful lua functions used by lots of plugins
+  use "windwp/nvim-autopairs"                 -- Auto close quote marks, brackets, etc
+  use "numToStr/Comment.nvim"                 -- Easily comment stuff
 
   -- Colorschemes
   use "navarasu/onedark.nvim"                 -- Atom's One Dark and Light theme
@@ -90,9 +92,8 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
-
-  -- Autopairs
-  use "windwp/nvim-autopairs"
+  -- Context aware commenting using tree-sitter
+  use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
