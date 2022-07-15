@@ -29,10 +29,10 @@ keymap("n", "<Leader>vst", ":vsplit term://zsh<CR>", opts)
 keymap("n", "<Leader>hst", ":split term://zsh<CR>", opts)
 
 -- Resize with arrows
-keymap("n", "<C-K>", ":resize +2<CR>", opts)
-keymap("n", "<C-J>", ":resize -2<CR>", opts)
-keymap("n", "<C-H>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-L>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-S-k>", ":resize +2<CR>", opts)
+keymap("n", "<C-S-j>", ":resize -2<CR>", opts)
+keymap("n", "<C-S-h>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-S-l>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -80,6 +80,7 @@ keymap("n", "<Leader>f", require("telescope.builtin").live_grep)
 -- Nvim Tree
 keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<Leader>q", ":Bdelete %<CR>", opts)
+keymap("n", "<Leader>qa", ":bufdo :Bdelete<CR>", opts)
 
 -- Ultra folding
 keymap('n', 'zR', require('ufo').openAllFolds)
