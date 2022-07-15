@@ -1,9 +1,18 @@
 -- Unfold code blocks after a buffer is displayed in a window
-vim.api.nvim_create_autocmd({ "BufWinEnter", "BufReadPost", "FileReadPost" }, {
-  pattern = { "*" },
-  callback = function()
-    vim.cmd "normal zR"
-  end,
+vim.api.nvim_create_autocmd(
+  {
+    "BufWinEnter",
+    "BufFilePost",
+    "BufReadPost",
+    "FileReadPost",
+    "BufWritePost",
+    "InsertLeave",
+  },
+  {
+    pattern = { "*" },
+    callback = function()
+      vim.cmd "normal zR"
+    end,
 })
 
 -- Change go imports order when starting to write the whole buffer to a file
