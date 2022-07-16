@@ -16,7 +16,7 @@ null_ls.setup({
 
 		-- Completion
 		completion.spell,
-		completion.luasnip,
+		-- completion.luasnip,
 
 		-- Diagnostics
 		diagnostics.codespell,
