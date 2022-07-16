@@ -25,7 +25,7 @@ cmp.setup {
     end,
   },
   view = {
-    entries = {name = 'custom', selection_order = 'near_cursor' }
+    entries = {name = "custom", selection_order = "near_cursor" }
   },
   mapping = cmp.mapping.preset.insert {
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
@@ -52,7 +52,7 @@ cmp.setup {
   },
   sources = {
     { name = "nvim_lsp", group_index = 2 },
-    { name = "nvim_lua", group_index = 2 },
+    -- { name = "nvim_lua", group_index = 2 },
     { name = "luasnip", group_index = 2 },
     { name = "buffer", group_index = 2 },
     { name = "path", group_index = 2 },
@@ -93,21 +93,21 @@ cmp.setup {
   },
 }
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+-- Use buffer source for `/` (if you enabled `native_menu`, this won"t work anymore).
+cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
+    { name = "buffer" }
   }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
+-- Use cmdline & path source for ":" (if you enabled `native_menu`, this won"t work anymore).
+cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path" },
   }, {
-    { name = 'cmdline' }
+    { name = "cmdline" },
   })
 })
 
@@ -115,9 +115,9 @@ cmp.setup.cmdline(':', {
 cmp.setup({
   enabled = function()
     -- disable completion in comments
-    local context = require 'cmp.config.context'
+    local context = require "cmp.config.context"
     -- keep command mode completion enabled when cursor is in a comment
-    if vim.api.nvim_get_mode().mode == 'c' then
+    if vim.api.nvim_get_mode().mode == "c" then
       return true
     else
       return not context.in_treesitter_capture("comment")
