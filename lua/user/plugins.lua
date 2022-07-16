@@ -103,6 +103,7 @@ return packer.startup(function(use)
   use "williamboman/nvim-lsp-installer"       -- simple to use language server installer
   use "RRethy/vim-illuminate"                 -- automatically highlighting other uses of the word under the cursor
   use "b0o/SchemaStore.nvim"                  -- JSON schemas for Neovim 
+  use "jose-elias-alvarez/null-ls.nvim"       -- for formatters and linters
 
   -- Telescope
   use {
