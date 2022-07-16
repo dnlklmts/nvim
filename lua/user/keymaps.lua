@@ -14,12 +14,6 @@ local keymap = vim.keymap.set
 --   command_mode = "c",
 
 -- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-
 -- Open file explorer
 -- keymap("n", "<Leader>e", ":Lex 30<CR>", opts)
 keymap("n", "<Leader>l", ":nohl<CR>", opts)
@@ -28,7 +22,7 @@ keymap("n", "<Leader>l", ":nohl<CR>", opts)
 keymap("n", "<Leader>vst", ":vsplit term://zsh<CR>", opts)
 keymap("n", "<Leader>hst", ":split term://zsh<CR>", opts)
 
--- Resize with arrows
+-- Resize window with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
