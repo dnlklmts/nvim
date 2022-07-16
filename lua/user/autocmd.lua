@@ -79,3 +79,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = formatAfterSave,
 })
+
+local disableLineNumbers = function()
+	vim.cmd([[ setlocal nonumber norelativenumber ]])
+end
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "*",
+	callback = disableLineNumbers,
+})
