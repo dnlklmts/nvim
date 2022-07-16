@@ -41,8 +41,8 @@ ufo.setup({
   open_fold_hl_timeout = 150,
   preview = {
     win_config = {
-      border = {'', '─', '', '', '', '─', '', ''},
-      winhighlight = 'Normal:Folded',
+      border = "solid",
+      winhighlight = "Normal:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",
       winblend = 0
     },
     mappings = {

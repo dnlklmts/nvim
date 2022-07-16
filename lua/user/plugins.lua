@@ -44,7 +44,7 @@ end
 packer.init {
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "rounded" }
+      return require("packer.util").float { border = "solid" }
     end,
   },
 }
@@ -83,7 +83,10 @@ return packer.startup(function(use)
   }
 
   -- cmp plugins
-  use "hrsh7th/nvim-cmp"                      -- The completion plugin
+  use {
+    "hrsh7th/nvim-cmp",                       -- The completion plugin
+    requires = "onsails/lspkind.nvim"         -- adds vscode-like pictograms to neovim built-in lsp
+  }
   use "hrsh7th/cmp-buffer"                    -- buffer completions
   use "hrsh7th/cmp-path"                      -- path completions
   use "hrsh7th/cmp-cmdline"                   -- cmdline completions
