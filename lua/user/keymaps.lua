@@ -87,7 +87,7 @@ keymap("n", "<Leader>qa", ":bufdo :Bdelete<CR>", opts)
 -- Ultra folding
 keymap("n", "zR", require("ufo").openAllFolds)
 keymap("n", "zM", require("ufo").closeAllFolds)
-keymap("n", "K", function()
+keymap("n", "zK", function()
 	local winid = require("ufo").peekFoldedLinesUnderCursor()
 	if not winid then
 		-- nvimlsp

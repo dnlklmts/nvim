@@ -27,15 +27,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- Save cursor last position
 -- from :help last-position-jump
-local savePosition = function()
-	vim.cmd([[
-    autocmd FileType <buffer> ++once
-      \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
-  ]])
-end
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = "*",
-	callback = savePosition,
+	callback = function()
+		vim.cmd([[
+      autocmd FileType <buffer> ++once
+        \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
+    ]])
+	end,
 })
 
 --[[
@@ -63,27 +62,34 @@ vim.api.nvim_create_autocmd( {"TextChangedI", "TextChangedP"}, {
 --]]
 
 -- https://vi.stackexchange.com/a/1985
-local rmFormatOpts = function()
-	vim.cmd([[ set fo-=c fo-=r fo-=o ]])
-end
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
-	callback = rmFormatOpts,
+	callback = function()
+		vim.cmd([[ set fo-=c fo-=r fo-=o ]])
+	end,
 })
 
 -- Code formatting after saving file
-local formatAfterSave = function()
-	vim.lsp.buf.formatting_sync({ async = true })
-end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
-	callback = formatAfterSave,
+	callback = function()
+		vim.lsp.buf.formatting_sync({ async = true })
+	end,
 })
 
-local disableLineNumbers = function()
-	vim.cmd([[ setlocal nonumber norelativenumber ]])
-end
+-- Disable line numbers for terminal buftype
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "*",
-	callback = disableLineNumbers,
+	callback = function()
+		vim.cmd([[ setlocal nonumber norelativenumber ]])
+	end,
+})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = function()
+		vim.api.nvim_set_hl(0, "NormalFloat", { link = "TelescopeNormal" })
+		vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeResultsBorder" })
+		vim.api.nvim_set_hl(0, "CursorLine", { link = "TelescopeSelection" })
+	end,
 })

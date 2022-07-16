@@ -75,14 +75,14 @@ cmp.setup({
 	},
 	window = {
 		documentation = {
-			border = "solid",
-			winhighlight = "Normal:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",
+			border = "rounded",
+			winhighlight = "NormalFloat:TelescopeNormal,CursorLine:TelescopeSelection,FloatBorder:TelescopePreviewBorder,Search:None",
 			col_offset = -3,
 			side_padding = 0,
 		},
 		completion = {
-			border = "solid",
-			winhighlight = "Normal:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None",
+			border = "rounded",
+			winhighlight = "NormalFloat:TelescopeNormal,CursorLine:TelescopeSelection,FloatBorder:TelescopePreviewBorder,Search:None",
 			col_offset = -3,
 			side_padding = 0,
 		},
