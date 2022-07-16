@@ -88,6 +88,7 @@ return packer.startup(function(use)
 		"kevinhwang91/nvim-ufo", -- Adding folds high accuracy with Folding Range in LSP
 		requires = "kevinhwang91/promise-async",
 	})
+	use("akinsho/toggleterm.nvim")
 
 	-- cmp plugins
 	use({

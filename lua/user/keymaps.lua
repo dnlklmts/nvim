@@ -55,32 +55,28 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
 -- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
--- Remap exiting terminal mode
-keymap("t", "C-[", "<C-\\><C-N>", term_opts)
+-- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+-- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+-- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+-- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Telescope shortcuts
 local tsbuiltin = require("telescope.builtin")
 local tsthemes = require("telescope.themes")
 
 keymap("n", "<Leader>p", function()
-  return tsbuiltin.find_files(tsthemes.get_dropdown({
-    previewer = false,
-    winblend = 10,
-  }))
+	return tsbuiltin.find_files(tsthemes.get_dropdown({
+		previewer = false,
+		winblend = 10,
+	}))
 end)
 
 keymap("n", "<Leader>f", tsbuiltin.live_grep)
 
 keymap("n", "<Leader>gr", function()
-  return tsbuiltin.lsp_references(
-    tsthemes.get_cursor({
-      winblend = 10,
-    }))
+	return tsbuiltin.lsp_references(tsthemes.get_cursor({
+		winblend = 10,
+	}))
 end)
 
 -- Nvim Tree
@@ -89,12 +85,12 @@ keymap("n", "<Leader>q", ":Bdelete %<CR>", opts)
 keymap("n", "<Leader>qa", ":bufdo :Bdelete<CR>", opts)
 
 -- Ultra folding
-keymap('n', 'zR', require('ufo').openAllFolds)
-keymap('n', 'zM', require('ufo').closeAllFolds)
-keymap('n', 'K', function()
-  local winid = require('ufo').peekFoldedLinesUnderCursor()
-  if not winid then
-    -- nvimlsp
-    vim.lsp.buf.hover()
-  end
+keymap("n", "zR", require("ufo").openAllFolds)
+keymap("n", "zM", require("ufo").closeAllFolds)
+keymap("n", "K", function()
+	local winid = require("ufo").peekFoldedLinesUnderCursor()
+	if not winid then
+		-- nvimlsp
+		vim.lsp.buf.hover()
+	end
 end)
