@@ -64,12 +64,24 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("t", "C-[", "<C-\\><C-N>", term_opts)
 
 -- Telescope shortcuts
+local tsbuiltin = require("telescope.builtin")
+local tsthemes = require("telescope.themes")
+
 keymap("n", "<Leader>p", function()
-  return require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
+  return tsbuiltin.find_files(tsthemes.get_dropdown({
     previewer = false,
     winblend = 10,
-  })) end)
-keymap("n", "<Leader>f", require("telescope.builtin").live_grep)
+  }))
+end)
+
+keymap("n", "<Leader>f", tsbuiltin.live_grep)
+
+keymap("n", "<Leader>gr", function()
+  return tsbuiltin.lsp_references(
+    tsthemes.get_cursor({
+      winblend = 10,
+    }))
+end)
 
 -- Nvim Tree
 keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
