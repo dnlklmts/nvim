@@ -96,6 +96,8 @@ return packer.startup(function(use)
 		"goolord/alpha-nvim", -- fast and fully customizable greeter for neovim
 		requires = "antoinemadec/FixCursorHold.nvim", -- fix lsp doc highlight
 	})
+	use("folke/which-key.nvim") -- opens a popup with suggestions to complete a key binding
+
 	-- cmp plugins
 	use({
 		"hrsh7th/nvim-cmp", -- The completion plugin
