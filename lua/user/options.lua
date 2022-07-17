@@ -50,5 +50,7 @@ end
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
 
-vim.opt.fillchars = vim.opt.fillchars + "eob: "
+-- vim.opt.fillchars = vim.opt.fillchars + "eob: "
+-- https://github.com/kevinhwang91/nvim-ufo/issues/4
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.opt.shortmess:append("c")
