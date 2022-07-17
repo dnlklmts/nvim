@@ -37,30 +37,6 @@ vim.api.nvim_create_autocmd("BufRead", {
 	end,
 })
 
---[[
--- Make autocompletions appear automatically if there's non empty space before the cursor and nothing in front of it.
-vim.api.nvim_create_autocmd( {"TextChangedI", "TextChangedP"}, {
-    callback = function()
-      local line = vim.api.nvim_get_current_line()
-      local cursor = vim.api.nvim_win_get_cursor(0)[2]
-
-      local current = string.sub(line, cursor, cursor + 1)
-      if current == "." or current == "," or current == " " then
-        cmp.close()
-      end
-
-      local before_line = string.sub(line, 1, cursor + 1)
-      local after_line = string.sub(line, cursor + 1, -1)
-      if not string.match(before_line, "^%s+$") then
-        if after_line == "" or string.match(before_line, " $") or string.match(before_line, "%.$") then
-          cmp.complete()
-        end
-      end
-  end,
-  pattern = "*"
-})
---]]
-
 -- https://vi.stackexchange.com/a/1985
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
@@ -85,16 +61,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
--- Disable spellchecker for terminal buftype
-vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = "*",
-	callback = function()
-		vim.cmd([[
-      setlocal nospell
-    ]])
-	end,
-})
-
 vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = function()
@@ -113,6 +79,35 @@ vim.api.nvim_create_autocmd({ "User" }, {
 		vim.cmd([[
       set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
       set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+    ]])
+	end,
+})
+
+-- Enable spellcheker for specified file types
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "gitcommit", "markdown", "text" },
+	callback = function()
+		vim.cmd([[
+      setlocal wrap
+      setlocal spell spelllang=en,ru
+    ]])
+	end,
+})
+
+-- Make all windows equal height & width
+vim.api.nvim_create_autocmd("VimResized", {
+	pattern = "*",
+	callback = function()
+		vim.cmd([[ tabdo wincmd = ]])
+	end,
+})
+
+-- Quit manual page with `q`
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "qf", "help", "man", "lspinfo" },
+	callback = function()
+		vim.cmd([[
+      nnoremap <silent> <buffer> q :close<CR>
     ]])
 	end,
 })
