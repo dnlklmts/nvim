@@ -89,7 +89,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "*",
 	callback = function()
-		vim.cmd([[ setlocal spell false]])
+		vim.cmd([[
+      setlocal nospell
+    ]])
 	end,
 })
 
