@@ -88,8 +88,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = function()
+		-- bg = "#242b38", border = "#4dbdcb"
 		vim.api.nvim_set_hl(0, "NormalFloat", { link = "TelescopeNormal" })
 		vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeResultsBorder" })
-		vim.api.nvim_set_hl(0, "CursorLine", { link = "TelescopeSelection" })
+		-- vim.api.nvim_set_hl(0, "CursorLine", { link = "TelescopeSelection" })
 	end,
 })
