@@ -109,6 +109,7 @@ return packer.startup(function(use)
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp") -- LSP completions
 	use("hrsh7th/cmp-nvim-lua") -- Lua completion
+	use("folke/lua-dev.nvim") -- full signature help, docs and completion for the nvim lua API
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") -- snippet engine
