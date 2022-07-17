@@ -94,3 +94,54 @@ keymap("n", "zK", function()
 		vim.lsp.buf.hover()
 	end
 end)
+
+-- Gitsigns
+local gs_ok, gs = pcall(require, "gitsigns")
+if not gs_ok then
+	vim.notify("failed to load gitsigns")
+	return
+end
+
+local function gs_keymap(mode, l, r, opts)
+	opts = opts or {}
+	opts.buffer = bufnr
+	keymap(mode, l, r, opts)
+end
+
+gs_keymap("n", "]c", function()
+	if vim.wo.diff then
+		return "]c"
+	end
+	vim.schedule(function()
+		gs.next_hunk()
+	end)
+	return "<Ignore>"
+end, { expr = true })
+
+gs_keymap("n", "[c", function()
+	if vim.wo.diff then
+		return "[c"
+	end
+	vim.schedule(function()
+		gs.prev_hunk()
+	end)
+	return "<Ignore>"
+end, { expr = true })
+
+gs_keymap({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+gs_keymap({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+gs_keymap("n", "<leader>hS", gs.stage_buffer)
+gs_keymap("n", "<leader>hu", gs.undo_stage_hunk)
+gs_keymap("n", "<leader>hR", gs.reset_buffer)
+gs_keymap("n", "<leader>hp", gs.preview_hunk)
+gs_keymap("n", "<leader>hb", function()
+	gs.blame_line({ full = true })
+end)
+gs_keymap("n", "<leader>tb", gs.toggle_current_line_blame)
+gs_keymap("n", "<leader>hd", gs.diffthis)
+gs_keymap("n", "<leader>hD", function()
+	gs.diffthis("~")
+end)
+gs_keymap("n", "<leader>td", gs.toggle_deleted)
+
+gs_keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
