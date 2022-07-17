@@ -57,6 +57,7 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
 	use("windwp/nvim-autopairs") -- Auto close quote marks, brackets, etc
 	use("numToStr/Comment.nvim") -- Easily comment stuff
+	use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time
 
 	-- Colorschemes
 	use("navarasu/onedark.nvim") -- Atom's One Dark and Light theme
