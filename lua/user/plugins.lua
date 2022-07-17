@@ -92,7 +92,10 @@ return packer.startup(function(use)
 	use("akinsho/toggleterm.nvim") -- floating terminal inside neovim
 	use("ahmedkhalf/project.nvim") -- superior project management
 	use("lukas-reineke/indent-blankline.nvim") -- adds indentation guides to all lines (including empty lines)
-
+	use({
+		"goolord/alpha-nvim", -- fast and fully customizable greeter for neovim
+		requires = "antoinemadec/FixCursorHold.nvim",  -- fix lsp doc highlight
+	})
 	-- cmp plugins
 	use({
 		"hrsh7th/nvim-cmp", -- The completion plugin

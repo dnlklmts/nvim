@@ -85,6 +85,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
+-- Disable spellchecker for terminal buftype
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "*",
+	callback = function()
+		vim.cmd([[ setlocal spell false]])
+	end,
+})
+
 vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = function()
@@ -92,5 +100,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		vim.api.nvim_set_hl(0, "NormalFloat", { link = "TelescopeNormal" })
 		vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeResultsBorder" })
 		-- vim.api.nvim_set_hl(0, "CursorLine", { link = "TelescopeSelection" })
+	end,
+})
+
+-- Disable statusline and tabline when open greeter dashboard
+vim.api.nvim_create_autocmd({ "User" }, {
+	pattern = "AlphaReady",
+	callback = function()
+		vim.cmd([[
+      set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
+      set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+    ]])
 	end,
 })
