@@ -34,7 +34,7 @@ null_ls.setup({
 
 		-- Formatting
 		formatting.stylua,
-		formatting.codespell,
+		-- formatting.codespell,
 		formatting.gofmt,
 		formatting.goimports,
 		formatting.golines,
