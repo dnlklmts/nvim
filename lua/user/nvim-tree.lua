@@ -26,7 +26,8 @@ nvim_tree.setup({ -- BEGIN_DEFAULT_OPTS
 	prefer_startup_root = false,
 	sync_root_with_cwd = false,
 	reload_on_bufenter = false,
-	respect_buf_cwd = false,
+	update_cwd = true,
+	respect_buf_cwd = true,
 	view = {
 		adaptive_size = false,
 		centralize_selection = false,
@@ -53,7 +54,7 @@ nvim_tree.setup({ -- BEGIN_DEFAULT_OPTS
 		group_empty = false,
 		highlight_git = false,
 		full_name = false,
-		highlight_opened_files = "all",
+		highlight_opened_files = "name",
 		root_folder_modifier = ":~",
 		indent_markers = {
 			enable = false,
@@ -109,6 +110,7 @@ nvim_tree.setup({ -- BEGIN_DEFAULT_OPTS
 	},
 	update_focused_file = {
 		enable = true,
+		update_cwd = true,
 		update_root = false,
 		ignore_list = {},
 	},

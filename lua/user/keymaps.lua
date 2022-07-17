@@ -53,13 +53,6 @@ keymap("x", "<S-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
--- Terminal --
--- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
 -- Telescope shortcuts
 local tsbuiltin = require("telescope.builtin")
 local tsthemes = require("telescope.themes")
@@ -78,6 +71,7 @@ keymap("n", "<Leader>gr", function()
 		winblend = 10,
 	}))
 end)
+keymap("n", "<Leader>gp", ":Telescope projects<CR>", opts)
 
 -- Nvim Tree
 keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
@@ -102,10 +96,10 @@ if not gs_ok then
 	return
 end
 
-local function gs_keymap(mode, l, r, opts)
-	opts = opts or {}
-	opts.buffer = bufnr
-	keymap(mode, l, r, opts)
+local function gs_keymap(mode, l, r, gs_opts)
+	gs_opts = gs_opts or {}
+	gs_opts.buffer = bufnr
+	keymap(mode, l, r, gs_opts)
 end
 
 gs_keymap("n", "]c", function()
