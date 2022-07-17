@@ -98,10 +98,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = function()
-		-- bg = "#242b38", border = "#4dbdcb"
-		vim.api.nvim_set_hl(0, "NormalFloat", { link = "TelescopeNormal" })
-		vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeResultsBorder" })
-		-- vim.api.nvim_set_hl(0, "CursorLine", { link = "TelescopeSelection" })
+		-- normalBg = "#242b38", telescopeBorderFg = "#4dbdcb", cursorSelBg = "#2d3343"
+		vim.api.nvim_set_hl(0, "Pmenu", { bg = "#242b38" })
+		vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#2d3343" })
+		vim.api.nvim_set_hl(0, "NormalFloat", { link = "Pmenu" })
+		vim.api.nvim_set_hl(0, "FloatBorder", { link = "Pmenu" })
 	end,
 })
 

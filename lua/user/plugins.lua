@@ -53,7 +53,7 @@ packer.init({
 return packer.startup(function(use)
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
-	use({ "nvim-lua/popup.nvim", disable = true }) -- An implementation of the Popup API from vim in Neovim
+	use({ "nvim-lua/popup.nvim", disable = false }) -- An implementation of the Popup API from vim in Neovim
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
 	use("windwp/nvim-autopairs") -- Auto close quote marks, brackets, etc
 	use("numToStr/Comment.nvim") -- Easily comment stuff
@@ -94,7 +94,7 @@ return packer.startup(function(use)
 	use("lukas-reineke/indent-blankline.nvim") -- adds indentation guides to all lines (including empty lines)
 	use({
 		"goolord/alpha-nvim", -- fast and fully customizable greeter for neovim
-		requires = "antoinemadec/FixCursorHold.nvim",  -- fix lsp doc highlight
+		requires = "antoinemadec/FixCursorHold.nvim", -- fix lsp doc highlight
 	})
 	-- cmp plugins
 	use({
