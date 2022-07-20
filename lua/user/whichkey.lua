@@ -179,11 +179,6 @@ local mappings = {
 				end,
 				"Quickfix",
 			},
-			s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
-			w = {
-				"<cmd>Telescope lsp_dynamic_workspace_symbols<CR>",
-				"Workspace Symbols",
-			},
 		},
 		j = {
 			name = "Jump to",
@@ -272,6 +267,11 @@ local mappings = {
 					return vim.lsp.buf.signature_help()
 				end,
 				"Signature Help",
+			},
+			S = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
+			w = {
+				"<cmd>Telescope lsp_dynamic_workspace_symbols<CR>",
+				"Workspace Symbols",
 			},
 		},
 		f = {
