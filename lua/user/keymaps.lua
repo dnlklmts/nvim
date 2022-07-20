@@ -59,7 +59,7 @@ end
 
 local function gs_keymap(mode, l, r, gs_opts)
 	gs_opts = gs_opts or {}
-	gs_opts.buffer = bufnr
+	gs_opts.buffer = 0
 	keymap(mode, l, r, gs_opts)
 end
 
