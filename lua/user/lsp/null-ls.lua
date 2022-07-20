@@ -15,7 +15,7 @@ null_ls.setup({
 		actions.gitsigns,
 
 		-- Completion
-		completion.spell,
+		-- completion.spell,
 		-- completion.luasnip,
 
 		-- Diagnostics
