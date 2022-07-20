@@ -30,7 +30,7 @@ local setup = {
 		-- override the label used to display some keys. It doesn't effect WK in any other way.
 		-- For example:
 		-- ["<space>"] = "SPC",
-		-- ["<cr>"] = "RET",
+		-- ["<CR>"] = "RET",
 		-- ["<tab>"] = "TAB",
 	},
 	icons = {
@@ -59,7 +59,7 @@ local setup = {
 	hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
 	show_help = true, -- show help message on the command line when the popup is visible
 	triggers = "auto", -- automatically setup triggers
-	-- triggers = {"<leader>"} -- or specify a list manually
+	-- triggers = {"<Leader>"} -- or specify a list manually
 	triggers_blacklist = {
 		-- list of mode / prefixes that should never be hooked by WhichKey
 		-- this is mostly relevant for key maps that start with a native binding
@@ -71,7 +71,7 @@ local setup = {
 
 local opts = {
 	mode = "n", -- NORMAL mode
-	prefix = "<leader>",
+	prefix = "<Leader>",
 	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 	silent = true, -- use `silent` when creating keymaps
 	noremap = true, -- use `noremap` when creating keymaps
@@ -80,110 +80,232 @@ local opts = {
 
 local mappings = {
 	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
-	["a"] = { "<cmd>Alpha<cr>", "Alpha" },
-	["b"] = {
-		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-		"Buffers",
-	},
-	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+	["a"] = { "<cmd>Alpha<CR>", "Alpha" },
+	["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
-	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["f"] = {
-		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+		function()
+			return require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
+				previewer = false,
+				winblend = 10,
+			}))
+		end,
 		"Find files",
 	},
-	["F"] = { "<cmd>Telescope live_grep theme=dropdown<cr>", "Find Text" },
-	["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
+	["F"] = { "<cmd>Telescope live_grep<CR>", "Find Text" },
+	["p"] = { "<cmd>Telescope projects<CR>", "Projects" },
 
-	p = {
+	b = {
+		name = "Buffers",
+		l = {
+			function()
+				return require("telescope.builtin").buffers(
+					require("telescope.themes").get_dropdown({ previewer = false })
+				)
+			end,
+			"List All Buffers",
+		},
+		c = { "<cmd>Bdelete %<CR>", "Close Buffer" },
+		q = { "<cmd>:bufdo :Bdelete<CR>", "Close All Buffers" },
+	},
+	P = {
 		name = "Packer",
-		c = { "<cmd>PackerCompile<cr>", "Compile" },
-		i = { "<cmd>PackerInstall<cr>", "Install" },
-		s = { "<cmd>PackerSync<cr>", "Sync" },
-		S = { "<cmd>PackerStatus<cr>", "Status" },
-		u = { "<cmd>PackerUpdate<cr>", "Update" },
+		c = { "<cmd>PackerCompile<CR>", "Compile" },
+		i = { "<cmd>PackerInstall<CR>", "Install" },
+		s = { "<cmd>PackerSync<CR>", "Sync" },
+		S = { "<cmd>PackerStatus<CR>", "Status" },
+		u = { "<cmd>PackerUpdate<CR>", "Update" },
 	},
 
 	g = {
 		name = "Git",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+		j = { "<cmd>lua require 'gitsigns'.next_hunk()<CR>", "Next Hunk" },
+		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<CR>", "Prev Hunk" },
+		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<CR>", "Stage Hunk" },
+		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<CR>", "Reset Hunk" },
+		S = { "<cmd>lua require 'gitsigns'.stage_buffer()<CR>", "Stage Buffer" },
 		u = {
-			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<CR>",
 			"Undo Stage Hunk",
 		},
-		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-		d = {
-			"<cmd>Gitsigns diffthis HEAD<cr>",
-			"Diff",
+		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<CR>", "Reset Buffer" },
+		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<CR>", "Preview Hunk" },
+		l = { "<cmd>lua require 'gitsigns'.blame_line({ full = true })<CR>", "Blame" },
+		t = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<CR>", "Toggle Blame" },
+		d = { "<cmd>lua require 'gitsigns'.diffthis()<CR>", "Diff" },
+		H = {
+			"<cmd>Gitsigns diffthis ~<CR>",
+			"Diff HEAD",
 		},
+		D = { "<cmd>lua require 'gitsigns'.toggle_deleted()<CR>", "Show Deleted" },
+		o = { "<cmd>Telescope git_status<CR>", "Open changed file" },
+		b = { "<cmd>Telescope git_branches<CR>", "Checkout branch" },
+		c = { "<cmd>Telescope git_commits<CR>", "Checkout commit" },
+		h = { "<cmd>lua require 'gitsigns'.select_hunk()<CR>", "Select Hunk" },
 	},
 
 	l = {
 		name = "LSP",
-		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		d = {
-			"<cmd>Telescope diagnostics<cr>",
-			"Document Diagnostics",
+			name = "Diagnostics",
+			h = {
+				function()
+					return vim.diagnostic.open_float()
+				end,
+				"Show Diagnostics",
+			},
+			d = {
+				"<cmd>Telescope diagnostics<CR>",
+				"Document Diagnostics",
+			},
+			j = {
+				function()
+					return vim.diagnostic.goto_next()
+				end,
+				"Next Diagnostic",
+			},
+			k = {
+				function()
+					return vim.diagnostic.goto_prev()
+				end,
+				"Prev Diagnostic",
+			},
+			q = {
+				function()
+					return vim.diagnostic.setloclist()
+				end,
+				"Quickfix",
+			},
+			s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
+			w = {
+				"<cmd>Telescope lsp_dynamic_workspace_symbols<CR>",
+				"Workspace Symbols",
+			},
 		},
-		-- w = {
-		-- 	"<cmd>Telescope lsp_workspace_diagnostics<cr>",
-		-- 	"Workspace Diagnostics",
-		-- },
-		f = { "<cmd>lua vim.lsp.buf.formatting({ async = true })<cr>", "Format" },
-		i = { "<cmd>LspInfo<cr>", "Info" },
-		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
 		j = {
-			"<cmd>lua vim.diagnostic.goto_next()<CR>",
-			"Next Diagnostic",
+			name = "Jump to",
+			d = {
+				function()
+					return vim.lsp.buf.declaration()
+				end,
+				"Declaration",
+			},
+			D = {
+				function()
+					return vim.lsp.buf.definition()
+				end,
+				"Definition",
+			},
+			i = {
+				function()
+					return vim.lsp.buf.implementation()
+				end,
+				"Implementation",
+			},
+			r = {
+				function()
+					return require("telescope.builtin").lsp_references(require("telescope.themes").get_cursor({
+						winblend = 10,
+					}))
+				end,
+				"References",
+			},
+			t = {
+				function()
+					return vim.lsp.buf.type_definition()
+				end,
+				"Type Definition",
+			},
 		},
-		k = {
-			"<cmd>lua vim.diagnostic.goto_prev()<cr>",
-			"Prev Diagnostic",
+		w = {
+			name = "Workspaces",
+			a = {
+				function()
+					return vim.lsp.buf.add_workspace_folder()
+				end,
+				"Add Workspace",
+			},
+			r = {
+				function()
+					return vim.lsp.buf.remove_workspace_folder()
+				end,
+				"Remove Workspace",
+			},
+			l = {
+				function()
+					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+				end,
+				"List Workspaces",
+			},
 		},
-		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-		q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-		S = {
-			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-			"Workspace Symbols",
+		s = {
+			name = "Symbols",
+			a = {
+				function()
+					return vim.lsp.buf.code_action()
+				end,
+				"Code Action",
+			},
+			h = {
+				function()
+					return vim.lsp.buf.hover()
+				end,
+				"Hover Info",
+			},
+			l = {
+				function()
+					vim.lsp.codelens.run()
+				end,
+				"CodeLens Actions",
+			},
+			r = {
+				function()
+					return vim.lsp.buf.rename()
+				end,
+				"Rename",
+			},
+			s = {
+				function()
+					return vim.lsp.buf.signature_help()
+				end,
+				"Signature Help",
+			},
 		},
+		f = {
+			function()
+				return vim.lsp.buf.formatting_sync()
+			end,
+			"Format",
+		},
+		i = { "<cmd>LspInfo<CR>", "Info" },
+		I = { "<cmd>LspInstallInfo<CR>", "Installer Info" },
 	},
 	s = {
 		name = "Search",
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-		R = { "<cmd>Telescope registers<cr>", "Registers" },
-		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		C = { "<cmd>Telescope commands<cr>", "Commands" },
+		t = { "<cmd>Telescope colorscheme<CR>", "Colorscheme" },
+		h = { "<cmd>Telescope help_tags<CR>", "Find Help" },
+		m = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
+		o = { "<cmd>Telescope oldfiles<CR>", "Open Recent File" },
+		r = { "<cmd>Telescope registers<CR>", "Registers" },
+		k = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
+		c = { "<cmd>Telescope commands<CR>", "Commands" },
 	},
 
 	t = {
 		name = "Terminal",
-		t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+		t = { "<cmd>lua _HTOP_TOGGLE()<CR>", "Htop" },
+		f = { "<cmd>ToggleTerm direction=float<CR>", "Float" },
+		h = { "<cmd>ToggleTerm size=10 direction=horizontal<CR>", "Horizontal" },
+		v = { "<cmd>ToggleTerm size=80 direction=vertical<CR>", "Vertical" },
 	},
 }
 
 local vopts = {
 	mode = "v", -- VISUAL mode
-	prefix = "<leader>",
+	prefix = "<Leader>",
 	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 	silent = true, -- use `silent` when creating keymaps
 	noremap = true, -- use `noremap` when creating keymaps

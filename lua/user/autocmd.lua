@@ -1,9 +1,3 @@
-local cmp_ok, cmp = pcall(require, "cmp")
-if not cmp_ok then
-	vim.notify("failed to load cmp plugin")
-	return
-end
-
 -- Save cursor last position
 -- from :help last-position-jump
 vim.api.nvim_create_autocmd("BufRead", {
@@ -28,7 +22,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
-		vim.lsp.buf.formatting_sync({ async = true })
+		vim.lsp.buf.formatting_sync({ async = true }, 100)
 	end,
 })
 

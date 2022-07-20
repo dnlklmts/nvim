@@ -68,46 +68,13 @@ local function lsp_highlight_document(client)
 	illuminate.on_attach(client)
 end
 
-local function lsp_keymaps(bufnr)
-	-- Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-	local opts = { noremap = true, silent = true }
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	local keymap = vim.keymap.set
-
-	keymap("n", "gl", vim.diagnostic.open_float, opts)
-	keymap("n", "[d", vim.diagnostic.goto_prev, opts)
-	keymap("n", "]d", vim.diagnostic.goto_next, opts)
-	keymap("n", "<Leader>sl", vim.diagnostic.setloclist, opts)
-
-	keymap("n", "gD", vim.lsp.buf.declaration, bufopts)
-	keymap("n", "gd", vim.lsp.buf.definition, bufopts)
-	keymap("n", "K", vim.lsp.buf.hover, bufopts)
-	keymap("n", "gi", vim.lsp.buf.implementation, bufopts)
-	keymap("n", "gs", vim.lsp.buf.signature_help, bufopts)
-	keymap("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-	keymap("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-	keymap("n", "<Leader>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, bufopts)
-	keymap("n", "<Leader>td", vim.lsp.buf.type_definition, bufopts)
-	keymap("n", "<Leader>rn", vim.lsp.buf.rename, bufopts)
-	keymap("n", "<Leader>ca", vim.lsp.buf.code_action, bufopts)
-	keymap("n", "gr", vim.lsp.buf.references, bufopts)
-	keymap("n", "<M-f>", function()
-		vim.lsp.buf.formatting({ async = true })
-	end, bufopts)
-end
-
-M.on_attach = function(client, bufnr)
+M.on_attach = function(client)
 	if client.name == "sumneko_lua" then
 		client.resolved_capabilities.document_formatting = false
 	end
 	if client.name == "gopls" then
 		client.resolved_capabilities.document_formatting = false
 	end
-	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end
 
