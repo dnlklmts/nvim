@@ -88,6 +88,10 @@ local openAllAndRefresh = function()
 	require("ufo").openAllFolds()
 	vim.cmd([[ IndentBlanklineRefresh ]])
 end
+local closeAllAndRefresh = function()
+	require("ufo").closeAllFolds()
+	vim.cmd([[ IndentBlanklineRefresh ]])
+end
 -- toggle folding with refresh indent guides
 keymap("n", "za", function()
 	vim.cmd([[ exe 'normal! za'.(foldlevel('.')?'':'l') ]])
@@ -104,7 +108,7 @@ keymap("n", "zo", function()
 	vim.cmd([[ IndentBlanklineRefresh ]])
 end, opts)
 keymap("n", "zR", openAllAndRefresh, opts)
-keymap("n", "zM", require("ufo").closeAllFolds, opts)
+keymap("n", "zM", closeAllAndRefresh, opts)
 keymap("n", "zK", function()
 	local winid = require("ufo").peekFoldedLinesUnderCursor()
 	if not winid then
