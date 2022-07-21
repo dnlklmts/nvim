@@ -96,7 +96,6 @@ local mappings = {
 	},
 	["F"] = { "<cmd>Telescope live_grep<CR>", "Find Text" },
 	["p"] = { "<cmd>Telescope projects<CR>", "Projects" },
-
 	b = {
 		name = "Buffers",
 		l = {
@@ -118,7 +117,6 @@ local mappings = {
 		S = { "<cmd>PackerStatus<CR>", "Status" },
 		u = { "<cmd>PackerUpdate<CR>", "Update" },
 	},
-
 	g = {
 		name = "Git",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
@@ -146,7 +144,6 @@ local mappings = {
 		c = { "<cmd>Telescope git_commits<CR>", "Checkout commit" },
 		h = { "<cmd>lua require 'gitsigns'.select_hunk()<CR>", "Select Hunk" },
 	},
-
 	l = {
 		name = "LSP",
 		d = {
@@ -293,7 +290,6 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
 		c = { "<cmd>Telescope commands<CR>", "Commands" },
 	},
-
 	t = {
 		name = "Terminal",
 		t = { "<cmd>lua _HTOP_TOGGLE()<CR>", "Htop" },

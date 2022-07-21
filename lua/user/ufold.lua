@@ -42,7 +42,7 @@ ufo.setup({
 	preview = {
 		win_config = {
 			border = "rounded",
-			winhighlight = "Normal:TelescopeNormal,NormalFloat:TelescopeNormal,CursorLine:TelescopeSelection,FloatBorder:TelescopePreviewBorder,Search:None",
+			winhighlight = "Normal:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,FloatBorder:Pmenu",
 			winblend = 0,
 		},
 		mappings = {

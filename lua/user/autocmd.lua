@@ -84,3 +84,11 @@ vim.api.nvim_create_autocmd("FileType", {
     ]])
 	end,
 })
+
+-- Refres the indent guides
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+	pattern = "*",
+	callback = function()
+		vim.cmd([[ IndentBlanklineRefresh ]])
+	end,
+})

@@ -82,8 +82,14 @@ gs_keymap("n", "[c", function()
 	end)
 	return "<Ignore>"
 end, { expr = true })
+
 -- Ultra folding
-keymap("n", "zR", require("ufo").openAllFolds)
+local openAllAndRefresh = function()
+	require("ufo").openAllFolds()
+	vim.cmd([[ IndentBlanklineRefresh ]])
+end
+-- keymap("n", "zR", require("ufo").openAllFolds)
+keymap("n", "zR", openAllAndRefresh)
 keymap("n", "zM", require("ufo").closeAllFolds)
 keymap("n", "zK", function()
 	local winid = require("ufo").peekFoldedLinesUnderCursor()
