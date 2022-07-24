@@ -140,6 +140,10 @@ return packer.startup(function(use)
 	-- Git
 	use("lewis6991/gitsigns.nvim")
 
+	-- Debugging
+	-- Debug Adapter Protocol client
+	use("mfussenegger/nvim-dap")
+
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

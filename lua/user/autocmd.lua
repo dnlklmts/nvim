@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd({ "User" }, {
 
 -- Enable spellcheker for specified file types
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "gitcommit", "markdown", "text" },
+	pattern = { "gitcommit", "markdown", "text", "prompt" },
 	callback = function()
 		vim.cmd([[
       setlocal wrap

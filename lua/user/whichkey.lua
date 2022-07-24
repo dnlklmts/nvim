@@ -3,6 +3,11 @@ if not status_ok then
 	return
 end
 
+local dap_ok, _ = pcall(require, "dap")
+if not dap_ok then
+	return
+end
+
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
@@ -78,6 +83,8 @@ local opts = {
 	nowait = true, -- use `nowait` when creating keymaps
 }
 
+local widgets = require("dap.ui.widgets")
+
 local mappings = {
 	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
 	["a"] = { "<cmd>Alpha<CR>", "Alpha" },
@@ -106,8 +113,66 @@ local mappings = {
 			end,
 			"List All Buffers",
 		},
-		c = { "<cmd>Bdelete %<CR>", "Close Buffer" },
+		c = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 		q = { "<cmd>:bufdo :Bdelete<CR>", "Close All Buffers" },
+	},
+	d = {
+		-- https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt#L437
+		name = "Debugging",
+		b = { "<Cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint" },
+		c = { "<Cmd>lua require('dap').continue()<CR>", "Continue" },
+		i = { "<Cmd>lua require('dap').step_into()<CR>", "Step Into" },
+		v = { "<Cmd>lua require('dap').step_over()<CR>", "Step Over" },
+		e = { "<CMD>DapToggleRepl<CR>", "Toggle REPL" },
+		a = { "<Cmd>lua require('dap').list_breakpoints()<CR>", "List Breakpoints" },
+		d = { "<Cmd>lua require('dap').clear_breakpoints()<CR>", "Clear Breakpoints" },
+		f = {
+			"<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+			"Breakpoint condition",
+		},
+		p = { "<Cmd>lua require('dap').pause()<CR>", "Pause" },
+		o = { "<Cmd>lua require('dap').step_out()<CR>", "Step Out" },
+		t = { "<Cmd>lua require('dap').terminate()<CR>", "Terminate" },
+		l = {
+			"<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+			"Log point",
+		},
+		r = { "<Cmd>lua require'dap'.run_last()<CR>", "Re-run Debugger" },
+		w = {
+			-- Experimental
+			-- https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt#L812
+			name = "Widgets",
+			s = {
+				function()
+					return widgets.centered_float(widgets.scopes)
+				end,
+				"Current Scope",
+			},
+			f = {
+				function()
+					return widgets.centered_float(widgets.frames)
+				end,
+				"Current Frames",
+			},
+			t = {
+				function()
+					return widgets.centered_float(widgets.threads)
+				end,
+				"Current Threads",
+			},
+			e = {
+				function()
+					return widgets.centered_float(widgets.expression)
+				end,
+				"Current Expression",
+			},
+			h = {
+				function()
+					return widgets.hover()
+				end,
+				"Current Value (hover)",
+			},
+		},
 	},
 	P = {
 		name = "Packer",
